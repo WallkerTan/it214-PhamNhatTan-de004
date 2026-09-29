@@ -19,6 +19,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "rooms", key = "#id", sync = true)
     public Room getRoomById(Long id) {
         return roomRepository.findById(id)
                 .orElseThrow(() -> new RoomNotFoundException(id));

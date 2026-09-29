@@ -31,5 +31,16 @@ notification:
   mail:
     from: ${MAIL_FROM:${MAIL_USERNAME:}}
   kafka:
-    reservation-created-topic: ${RESERVATION_CREATED_TOPIC:reservation-created}
+    reservation-created-topic: ${RESERVATION_CREATED_TOPIC:resvervation-created}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+    register-with-eureka: ${EUREKA_REGISTER:true}
+    fetch-registry: ${EUREKA_FETCH_REGISTRY:true}
+  instance:
+    prefer-ip-address: ${EUREKA_PREFER_IP_ADDRESS:true}
+    instance-id: ${spring.application.name}:${HOSTNAME:localhost}:${server.port}
+
 

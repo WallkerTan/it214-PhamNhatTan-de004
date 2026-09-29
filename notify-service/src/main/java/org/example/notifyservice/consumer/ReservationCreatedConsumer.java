@@ -16,7 +16,13 @@ public class ReservationCreatedConsumer {
         this.emailService = emailService;
     }
 
+    private static final Logger log = LoggerFactory.getLogger(ReservationCreatedConsumer.class);
+
+    @KafkaListener(topics = "${notification.kafka.reservation-created-topic:resvervation-created}")
     public void consume(String email) {
-        throw new UnsupportedOperationException();
+        log.info("Received reservation created message for email: {}", email);
+        if (StringUtils.hasText(email)) {
+            emailService.sendReservationCreatedEmail(email.trim());
+        }
     }
 }

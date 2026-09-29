@@ -39,3 +39,15 @@ eureka:
   instance:
     prefer-ip-address: ${EUREKA_PREFER_IP_ADDRESS:true}
     instance-id: ${spring.application.name}:${HOSTNAME:localhost}:${server.port}
+
+app:
+  kafka:
+    reservation-created-topic: ${RESERVATION_CREATED_TOPIC:resvervation-created}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      roomService:
+        ignore-exceptions:
+          - org.example.reservationservice.exceptions.RoomNotFoundException
+

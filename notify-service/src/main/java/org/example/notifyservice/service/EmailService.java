@@ -20,6 +20,16 @@ public class EmailService {
     }
 
     public void sendReservationCreatedEmail(String recipient) {
-        throw new UnsupportedOperationException();
+        if (!StringUtils.hasText(recipient)) {
+            throw new IllegalArgumentException("Recipient email must not be blank");
+        }
+        SimpleMailMessage message = new SimpleMailMessage();
+        if (StringUtils.hasText(from)) {
+            message.setFrom(from);
+        }
+        message.setTo(recipient.trim());
+        message.setSubject("Đặt phòng thành công");
+        message.setText("Đơn đặt phòng của quý khách đã được tạo thành công.");
+        mailSender.send(message);
     }
 }
